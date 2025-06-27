@@ -1,0 +1,36 @@
+<div class="login">
+  <div class="login__container">
+    <h2 class="login__title">Iniciar sesión</h2>
+
+    <form class="login__form">
+      <div class="login__form-group">
+        <label for="email" class="login__label">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          class="login__input form-control"
+          placeholder="Ingresa tu correo"
+        />
+      </div>
+
+      <div class="login__form-group">
+        <label for="password" class="login__label">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          class="login__input form-control"
+          placeholder="Ingresa tu contraseña"
+        />
+      </div>
+
+      <div class="login__form-group login__form-group--center">
+        <button type="submit" class="login__button">Entrar</button>
+      </div>
+    </form>
+
+    <div class="login__register-link">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Regístrate aquí</a>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+// Variables de colores
+$color-primary: #5E918B;
+$color-secondary: #6c757d;
+$color-light: #f8f9fa;
+$color-white: #ffffff;
+$shadow-default: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+// Tipografía
+$font-title: 'Segoe UI', sans-serif;
+$font-body: 'Roboto', sans-serif;
+
+// Espaciado general
+$padding-section: 3rem 0;
+
+// Mixins
+@mixin section-padding {
+  padding: $padding-section;
+}
+
+body {
+  font-family: $font-body;
+  background-color: $color-light;
+  color: $color-secondary;
+  margin: 0;
+  padding: 0;
+}
