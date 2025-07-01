@@ -1,1 +1,52 @@
-<p>register works!</p>
+<div class="login">
+  <div class="login__container">
+    <h2 class="login__title">Crear cuenta</h2>
+
+    <form class="login__form" (ngSubmit)="onSubmit()">
+      <div class="login__form-group">
+        <label for="name" class="login__label">Nombre completo</label>
+        <input
+          type="text"
+          id="name"
+          class="login__input form-control"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+      </div>
+
+      <div class="login__form-group">
+        <label for="email" class="login__label">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          class="login__input form-control"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <div class="login__form-group">
+        <label for="password" class="login__label">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          class="login__input form-control"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+
+      <div class="login__form-group login__form-group--center">
+        <button type="submit" class="login__button">Registrarse</button>
+      </div>
+    </form>
+
+    <div class="login__register-link">
+      ¿Ya tienes una cuenta?
+      <a routerLink="/login">Inicia sesión aquí</a>
+    </div>
+  </div>
+</div>

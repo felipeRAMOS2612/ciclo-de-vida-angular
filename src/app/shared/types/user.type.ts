@@ -1,10 +1,9 @@
 import { Role } from "./role.type";
 
-export type User = {
+export interface User {
     id: number;
     name: string;
     email: string;
-    role: Role;
-    createdAt: Date;
-    updatedAt: Date;
+    password: string;
+    role?: Role;
 }

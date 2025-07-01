@@ -1,4 +1,9 @@
-// Variables de colores
+@use '@angular/material' as mat;
+
+// Incluir core de Material (OBLIGATORIO)
+@include mat.core();
+
+// Variables de colores personalizadas
 $color-primary: #5E918B;
 $color-secondary: #6c757d;
 $color-light: #f8f9fa;
@@ -17,10 +22,35 @@ $padding-section: 3rem 0;
   padding: $padding-section;
 }
 
+// Variables CSS personalizadas
+:root {
+  --color-primary: #{$color-primary};
+  --color-secondary: #{$color-secondary};
+  --color-light: #f8f9fa;
+  --color-background: #ffffff;
+  --color-text: #212529;
+  --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+// Tema oscuro
+[data-theme='dark'] {
+  --color-primary: #{$color-primary};
+  --color-secondary: #adb5bd;
+  --color-light: #212529;
+  --color-background: #343a40;
+  --color-text: #f8f9fa;
+  --shadow-default: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='light'] {
+  --color-background: #ffffff;
+  --color-text: #212529;
+}
+
+// Estilos base que se adaptan al tema
 body {
   font-family: $font-body;
-  background-color: $color-light;
-  color: $color-secondary;
   margin: 0;
   padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

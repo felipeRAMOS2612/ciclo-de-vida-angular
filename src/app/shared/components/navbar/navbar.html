@@ -1,12 +1,18 @@
-<nav class="navbar">
-  <div class="navbar__container">
-    <a class="navbar__brand" [href]="homeUrl">
-        <img src="logo-black.webp" alt="Logo" class="navbar__logo" />
-    </a>
+<mat-toolbar color="primary" class="navbar" role="navigation">
+  <a [routerLink]="homeUrl" class="navbar__brand" aria-label="Home">
+    <img src="logo-black.webp" alt="Logo" class="navbar__logo" />
+  </a>
 
-    <div class="navbar__links">
-      <a [href]="loginUrl" class="navbar__btn navbar__btn--primary">Iniciar sesión</a>
-      <a class="navbar__btn navbar__btn--outline">Registrarse</a>
-    </div>
-  </div>
-</nav>
+  <span class="navbar__spacer"></span>
+
+  <ng-container *ngIf="!currentUser; else loggedIn">
+    <a mat-button [routerLink]="loginUrl">Iniciar sesión</a>
+    <a mat-stroked-button color="accent" [routerLink]="registerUrl">Registrarse</a>
+  </ng-container>
+
+  <ng-template #loggedIn>
+    <a mat-raised-button color="accent" [routerLink]="dashboardUrl">
+      Ir al panel
+    </a>
+  </ng-template>
+</mat-toolbar>
