@@ -82,7 +82,6 @@ export class Profile {
       therapistId: therapistId ? String(therapistId) : undefined,
     };
 
-    // Actualizar lista de usuarios
     const users = this.storage.getUsers().map(u =>
       u.id === currentUser?.id ? updatedUser : u
     );

@@ -80,6 +80,9 @@
           "options": {
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
+            "main": "src/test.ts",
+            "karmaConfig": "karma.conf.js",
+            "polyfills": ["zone.js"],
             "assets": [
               {
                 "glob": "**/*",

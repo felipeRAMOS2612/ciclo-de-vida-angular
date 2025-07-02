@@ -44,7 +44,7 @@ export class Events implements OnInit {
     this.updateStats();
   }
 
-  private loadUserEvents(): void {
+  loadUserEvents(): void {
     const currentUser = this.storageService.getCurrentUser();
     if (!currentUser || !currentUser.id) {
       this.events = [];
@@ -93,6 +93,7 @@ export class Events implements OnInit {
         }
 
         const newEvent: Event = {
+          id: this.generateNewId(),
           userId: currentUser.id!,
           title: result.title,
           date: result.date,
@@ -123,12 +124,18 @@ export class Events implements OnInit {
   deleteEvent(event: Event): void {
     console.log('Eliminar evento:', event);
     
+    // Verificar que el evento tenga un ID válido
+    if (!event.id) {
+      console.error('El evento no tiene un ID válido:', event);
+      return;
+    }
+
     // Eliminar usando el servicio
-    this.storageService.deleteEvent(event.id!);
-    
+    this.storageService.deleteEvent(event.id);
+
     // Recargar events del usuario
     this.loadUserEvents();
-    
+
     setTimeout(() => {
       this.updateStats();
       this.cdr.markForCheck();
