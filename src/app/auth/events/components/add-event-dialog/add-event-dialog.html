@@ -1,0 +1,58 @@
+<h2 mat-dialog-title>
+    <mat-icon>event</mat-icon>
+    Agregar Nuevo Evento
+</h2>
+
+<mat-dialog-content>
+    <form [formGroup]="eventForm" class="event-form">
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Título del evento</mat-label>
+            <input matInput formControlName="title" placeholder="Ej: Cumpleaños, Viaje, etc.">
+            <mat-error *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched">
+                El título es requerido
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="date">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="eventForm.get('date')?.invalid && eventForm.get('date')?.touched">
+                La fecha es requerida
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.value">
+                    <div class="category-option">
+                        <div class="category-color" [style.backgroundColor]="category.color"></div>
+                        {{ category.label }}
+                    </div>
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eventForm.get('category')?.invalid && eventForm.get('category')?.touched">
+                La categoría es requerida
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descripción (opcional)</mat-label>
+            <textarea matInput formControlName="description" placeholder="Detalles adicionales del evento"
+                rows="3"></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">
+        <mat-icon>close</mat-icon>
+        Cancelar
+    </button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="eventForm.invalid">
+        <mat-icon>save</mat-icon>
+        Guardar Evento
+    </button>
+</mat-dialog-actions>

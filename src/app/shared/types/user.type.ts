@@ -1,9 +1,10 @@
 import { Role } from "./role.type";
 
 export interface User {
-    id: number;
+    id?: number;
     name: string;
     email: string;
     password: string;
-    role?: Role;
+    roleId?: number;
+    therapistId?: string;
 }

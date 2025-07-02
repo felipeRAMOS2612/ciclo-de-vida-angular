@@ -1,0 +1,23 @@
+.recomendaciones-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .recomendaciones-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: var(--md-sys-color-on-background);
+  }
+
+  .recomendaciones-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .recomendacion-card {
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+  }
+}

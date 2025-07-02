@@ -1,5 +1,4 @@
 <mat-sidenav-container class="layout">
-  <!-- Sidenav (sidebar lateral) -->
   <mat-sidenav 
     #sidenav 
     position="start" 
@@ -7,14 +6,12 @@
     class="sidenav"
     [opened]="sidenavOpened">
     
-    <!-- Encabezado del sidebar -->
     <div class="sidenav__header">
       <button mat-icon-button (click)="toggleSidenav()" class="close-btn">
         <mat-icon>close</mat-icon>
       </button>
     </div>
 
-    <!-- Navegación principal -->
     <mat-nav-list class="sidenav__nav">
       <a mat-list-item routerLink="/auth/dashboard" routerLinkActive="active" (click)="closeSidenavOnMobile()">
         <mat-icon matListItemIcon>dashboard</mat-icon>
@@ -30,7 +27,6 @@
       </a>
     </mat-nav-list>
 
-    <!-- Footer del sidebar -->
     <div class="sidenav__footer">
       <button mat-icon-button [matMenuTriggerFor]="themeMenu" class="theme-btn">
         <mat-icon>{{ themeService.selectedTheme()?.icon }}</mat-icon>
@@ -49,16 +45,13 @@
     </div>
   </mat-sidenav>
 
-  <!-- Contenido principal -->
   <mat-sidenav-content class="layout__content">
-    <!-- Toolbar con botón hamburguesa -->
     <mat-toolbar class="toolbar">
       <button mat-icon-button (click)="toggleSidenav()" class="menu-btn">
         <mat-icon>menu</mat-icon>
       </button>
     </mat-toolbar>
 
-    <!-- ✅ AQUÍ va el router-outlet -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>

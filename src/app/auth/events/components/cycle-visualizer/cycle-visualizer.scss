@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 350px;
+}
+
+canvas {
+  display: block;
+  background-color: var(--color-background);
+  border-radius: 50%;
+  width: 100%;
+  height: fit-content
+}

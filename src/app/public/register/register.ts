@@ -18,7 +18,7 @@ export class Register {
   name: string = '';
   email: string = '';
   password: string = '';
-
+  therapistId: string = '';
   constructor(
     private storageService: StorageService,
     private router: Router
@@ -37,10 +37,11 @@ export class Register {
       name: this.name,
       email: this.email,
       password: this.password,
+      therapistId: this.therapistId,
     };
 
     this.storageService.saveUser(newUser);
     this.storageService.setCurrentUser(newUser);
-    this.router.navigate(['/']); // redirect to home or dashboard
+    this.router.navigate(['/']);
   }
 }

@@ -1,1 +1,15 @@
-<p>dashboard works!</p>
+<section class="recomendaciones-container">
+  <h2 class="recomendaciones-title">Recomendaciones</h2>
+
+  <div class="recomendaciones-feed">
+    <mat-card *ngFor="let rec of recomendaciones" class="recomendacion-card mat-elevation-z2">
+      <mat-card-header>
+        <mat-card-title>{{ rec.title }}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>{{ rec.content }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+<div class="visualizer-container mat-typography">
+    <mat-card class="visualizer-header mat-elevation-z2">
+        <mat-card-title>Visualizador de Ciclos Personales</mat-card-title>
+    </mat-card>
+
+    <div class="visualizer-grid">
+        <mat-card class="visualizer-canvas mat-elevation-z2">
+            <app-cycle-visualizer [events]="events" [diameter]="350"></app-cycle-visualizer>
+        </mat-card>
+
+        <mat-card class="visualizer-events mat-elevation-z2">
+            <mat-card-title>Eventos Registrados</mat-card-title>
+            <mat-divider></mat-divider>
+            <section class="events">
+                <div *ngFor="let evento of events" class="evento-item">
+                    <div class="evento-dot" [style.backgroundColor]="evento.color"></div>
+                    <div class="evento-info">
+                        <div class="evento-title">{{ evento.title }}</div>
+                        <div class="evento-date">{{ evento.date | date }}</div>
+                    </div>
+
+                    <div class="evento-actions">
+                        <button mat-icon-button color="accent" (click)="editEvent(evento)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="deleteEvent(evento)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </mat-card>
+    </div>
+    <div class="visualizer-footer">
+        <div class="summary-text">
+            {{ eventCount }} evento(s) registrados · Categoría más frecuente: <strong>{{ mostFrequentCategory }}</strong>
+        </div>
+        <button mat-fab color="primary" (click)="openAddEventDialog()" aria-label="Agregar Evento">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
