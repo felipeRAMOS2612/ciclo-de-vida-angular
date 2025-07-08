@@ -7,6 +7,7 @@ import { Register } from './public/register/register';
 import { Dashboard } from './auth/dashboard/dashboard';
 import { Events } from './auth/events/events';
 import { Profile } from './auth/profile/profile';
+import { authGuard } from './shared/guards/local-storage.guard';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
     {
         path: 'auth',
         component: PrivateLayout,
+        canActivate: [authGuard],
         children: [
             {
                 path: 'dashboard',

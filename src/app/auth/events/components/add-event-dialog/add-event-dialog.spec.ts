@@ -11,7 +11,7 @@ describe('AddEventDialog', () => {
       imports: [AddEventDialog],
       providers: [
         { provide: MatDialogRef, useValue: { close: jasmine.createSpy('close') } },
-        { provide: MAT_DIALOG_DATA, useValue: {} } // si es necesario
+        { provide: MAT_DIALOG_DATA, useValue: {} }
       ]
     }).compileComponents();
 
