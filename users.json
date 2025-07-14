@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Felipe David Ramos Ramos",
+        "email": "feliperamos2612@gmail.com",
+        "password": "Feliperamos123",
+        "therapistId": "",
+        "roleId": 2
+    },
+    {
+        "id": 2,
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "password": "JohnDoe123",
+        "therapistId": "",
+        "roleId": 2
+    }
+    ,
+    {
+        "id": 3,
+        "name": "Jane Smith",
+        "email": "janesmith@example.com",
+        "password": "JaneSmith123",
+        "therapistId": "",
+        "roleId": 1 
+    }
+]

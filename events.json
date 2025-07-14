@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "userId": 1,
+        "title": "Viaje",
+        "date": "2025-07-14",
+        "category": "viaje",
+        "color": "#3f51b5",
+        "description": "Un viaje a la playa"
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "title": "Consulta médica",
+        "date": "2025-07-15",
+        "category": "consulta",
+        "color": "#f44336",
+        "description": "Consulta médica anual"
+    },
+    {
+        "id": 3,
+        "userId": 2,
+        "title": "Cumpleaños de Jane",
+        "date": "2025-07-16",
+        "category": "cumpleaños",
+        "color": "#4caf50",
+        "description": "Celebración del cumpleaños de Jane"
+    }
+]
