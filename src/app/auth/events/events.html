@@ -3,7 +3,14 @@
         <mat-card-title>Visualizador de Ciclos Personales</mat-card-title>
     </mat-card>
 
-    <div class="visualizer-grid">
+    <!-- Loading spinner -->
+    <div *ngIf="isLoading" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Cargando eventos...</p>
+    </div>
+
+    <!-- Contenido principal (solo se muestra cuando no está cargando) -->
+    <div *ngIf="!isLoading" class="visualizer-grid">
         <mat-card class="visualizer-canvas mat-elevation-z2">
             <app-cycle-visualizer [events]="events" [diameter]="350"></app-cycle-visualizer>
         </mat-card>
@@ -12,6 +19,10 @@
             <mat-card-title>Eventos Registrados</mat-card-title>
             <mat-divider></mat-divider>
             <section class="events">
+                <div *ngIf="events.length === 0" class="no-events-message">
+                    <mat-icon>event_busy</mat-icon>
+                    <p>No tienes eventos registrados</p>
+                </div>
                 <div *ngFor="let evento of events" class="evento-item">
                     <div class="evento-dot" [style.backgroundColor]="evento.color"></div>
                     <div class="evento-info">
@@ -31,7 +42,7 @@
             </section>
         </mat-card>
     </div>
-    <div class="visualizer-footer">
+    <div *ngIf="!isLoading" class="visualizer-footer">
         <div class="summary-text">
             {{ eventCount }} evento(s) registrados · Categoría más frecuente: <strong>{{ mostFrequentCategory }}</strong>
         </div>

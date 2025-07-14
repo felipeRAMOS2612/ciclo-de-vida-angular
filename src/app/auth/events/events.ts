@@ -10,8 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddEventDialog } from './components/add-event-dialog/add-event-dialog';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { StorageService } from '../../shared/services/storage';
+import { StorageService } from '../../shared/services/storage.service';
+import { DataService } from '../../shared/services/api.service';
 import { Event } from '../../shared/types/event.type';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-events',
@@ -26,6 +29,7 @@ import { Event } from '../../shared/types/event.type';
     MatSelectModule,
     MatDividerModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './events.html',
   styleUrls: ['./events.scss']
@@ -34,27 +38,42 @@ export class Events implements OnInit {
   private dialog = inject(MatDialog);
   private cdr = inject(ChangeDetectorRef);
   private storageService = inject(StorageService);
+  private dataService = inject(DataService);
+  private snackBar = inject(MatSnackBar);
   
   events: Event[] = [];
   eventCount: number = 0;
   mostFrequentCategory: string = 'Ninguna';
+  isLoading: boolean = false;
 
   ngOnInit() {
     this.loadUserEvents();
-    this.updateStats();
   }
 
   loadUserEvents(): void {
     const currentUser = this.storageService.getCurrentUser();
     if (!currentUser || !currentUser.id) {
       this.events = [];
+      this.updateStats();
       return;
     }
-    if (currentUser) {
-      this.events = this.storageService.getEventsByUser(currentUser.id);
-    } else {
-      this.events = [];
-    }
+
+    this.isLoading = true;
+    this.dataService.getEventsByUser(currentUser.id).subscribe({
+      next: (events) => {
+        this.events = events;
+        this.updateStats();
+        this.isLoading = false;
+        console.log('Eventos del usuario cargados:', events);
+      },
+      error: (error) => {
+        console.error('Error cargando eventos del usuario:', error);
+        this.showError('Error al cargar los eventos');
+        this.events = [];
+        this.updateStats();
+        this.isLoading = false;
+      }
+    });
   }
 
   private updateStats(): void {
@@ -89,62 +108,63 @@ export class Events implements OnInit {
         const currentUser = this.storageService.getCurrentUser();
         if (!currentUser) {
           console.error('No hay usuario autenticado');
+          this.showError('No hay usuario autenticado');
           return;
         }
 
-        const newEvent: Event = {
-          id: this.generateNewId(),
-          userId: currentUser.id!,
+        // Mostrar mensaje informativo ya que los eventos se obtienen de GitHub
+        this.showInfo('Funcionalidad de agregar eventos próximamente disponible');
+        
+        // Nota: En una implementación real, aquí harías una petición POST
+        // para agregar el evento a tu backend/API
+        console.log('Evento que se agregaría:', {
+          userId: currentUser.id,
           title: result.title,
           date: result.date,
           category: result.category,
           color: result.color,
-        };
-        
-        this.storageService.saveEvent(newEvent);
-        
-        // Recargar events del usuario
-        this.loadUserEvents();
-        
-        setTimeout(() => {
-          this.updateStats();
-          this.cdr.markForCheck();
-        }, 0);
-        
-        console.log('Evento agregado:', newEvent);
+        });
       }
     });
   }
 
-  private generateNewId(): number {
-    const allEvents = this.storageService.getEvents();
-    return allEvents.length > 0 ? Math.max(...allEvents.map(e => e.id!)) + 1 : 1;
-  }
-
   deleteEvent(event: Event): void {
-    console.log('Eliminar evento:', event);
+    // Mostrar mensaje informativo ya que los eventos se obtienen de GitHub
+    this.showInfo('Funcionalidad de eliminar eventos próximamente disponible');
     
-    // Verificar que el evento tenga un ID válido
-    if (!event.id) {
-      console.error('El evento no tiene un ID válido:', event);
-      return;
-    }
-
-    // Eliminar usando el servicio
-    this.storageService.deleteEvent(event.id);
-
-    // Recargar events del usuario
-    this.loadUserEvents();
-
-    setTimeout(() => {
-      this.updateStats();
-      this.cdr.markForCheck();
-    }, 0);
+    // Nota: En una implementación real, aquí harías una petición DELETE
+    // para eliminar el evento de tu backend/API
+    console.log('Evento que se eliminaría:', event);
   }
 
   editEvent(event: Event): void {
-    console.log('Editar evento:', event);
-    // Aquí podrías abrir un diálogo para editar el evento
-    // Similar al de agregar pero pre-poblado con los datos del evento
+    // Mostrar mensaje informativo ya que los eventos se obtienen de GitHub
+    this.showInfo('Funcionalidad de editar eventos próximamente disponible');
+    
+    // Nota: En una implementación real, aquí harías una petición PUT
+    // para actualizar el evento en tu backend/API
+    console.log('Evento que se editaría:', event);
+  }
+
+  refreshEvents(): void {
+    this.loadUserEvents();
+  }
+
+  private showError(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 4000,
+      panelClass: ['error-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
+  }
+
+  private showInfo(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 3000,
+      panelClass: ['info-snackbar'],
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 }

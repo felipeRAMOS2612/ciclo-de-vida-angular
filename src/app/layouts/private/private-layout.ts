@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { ThemeService } from '../../theme.service';
-import { StorageService } from '../../shared/services/storage';
+import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
   selector: 'app-private-layout',

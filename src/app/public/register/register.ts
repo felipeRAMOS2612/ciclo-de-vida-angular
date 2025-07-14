@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { StorageService } from '../../shared/services/storage';
+import { StorageService } from '../../shared/services/storage.service';
 import { User } from '../../shared/types/user.type';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
-import { StorageService } from '../../services/storage';
+import { StorageService } from '../../services/storage.service';
 import { User } from '../../types/user.type';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';

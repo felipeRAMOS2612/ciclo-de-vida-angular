@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { StorageService } from '../../shared/services/storage';
+import { StorageService } from '../../shared/services/storage.service';
 import { User } from '../../shared/types/user.type';
 import { ROLES } from '../../shared/enums/role.enum';
 
