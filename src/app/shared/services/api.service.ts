@@ -14,7 +14,6 @@ export class DataService {
   private readonly USERS_URL = 'https://raw.githubusercontent.com/felipeRAMOS2612/ciclo-de-vida-angular/main/users.json';
   private readonly EVENTS_URL = 'https://raw.githubusercontent.com/felipeRAMOS2612/ciclo-de-vida-angular/main/events.json';
 
-  // Obtener usuarios desde GitHub
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.USERS_URL).pipe(
       catchError(error => {
@@ -24,7 +23,6 @@ export class DataService {
     );
   }
 
-  // Obtener eventos desde GitHub
   getEvents(): Observable<Event[]> {
     return this.http.get<Event[]>(this.EVENTS_URL).pipe(
       catchError(error => {
@@ -34,7 +32,6 @@ export class DataService {
     );
   }
 
-  // Cargar datos iniciales (para verificar que la API funciona)
   loadInitialData(): Observable<{users: User[], events: Event[]}> {
     return forkJoin({
       users: this.getUsers(),
@@ -47,7 +44,6 @@ export class DataService {
     );
   }
 
-  // Autenticar usuario consultando la API de GitHub
   authenticateUser(email: string, password: string): Observable<User | null> {
     return this.getUsers().pipe(
       map(users => {
@@ -64,7 +60,6 @@ export class DataService {
     );
   }
 
-  // Obtener eventos por usuario consultando la API
   getEventsByUser(userId: number): Observable<Event[]> {
     return this.getEvents().pipe(
       map(events => events.filter(event => event.userId === userId)),
