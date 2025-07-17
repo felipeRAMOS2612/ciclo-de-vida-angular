@@ -1,37 +1,18 @@
+FROM node:alpine as build
 
-FROM node:20-alpine AS builder
+WORKDIR /usr/local/app
 
-RUN apk add --no-cache curl
+COPY ./ /usr/local/app/
 
-WORKDIR /app
-
-COPY package*.json ./
-
-RUN npm ci --only=production && npm cache clean --force
-
-COPY . .
-
+RUN npm install
 RUN npm run build
 
-FROM node:20-alpine AS production
+# Renombra index.csr.html si existe
+RUN if [ -f /usr/local/app/dist/ciclos-de-vida/browser/index.csr.html ]; then mv /usr/local/app/dist/ciclos-de-vida/browser/index.csr.html /usr/local/app/dist/ciclos-de-vida/browser/index.html; fi
 
-RUN apk add --no-cache curl dumb-init
+FROM nginx:1.24.0
 
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S angular -u 1001
+COPY --from=build /usr/local/app/dist/ciclos-de-vida/browser /usr/share/nginx/html
+COPY ./nginx/default.conf  /etc/nginx/conf.d/default.conf
 
-WORKDIR /app
-
-COPY --from=builder --chown=angular:nodejs /app/dist ./dist
-COPY --from=builder --chown=angular:nodejs /app/package*.json ./
-COPY --from=builder --chown=angular:nodejs /app/node_modules ./node_modules
-
-USER angular
-
-EXPOSE 4000
-
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:4000/health || exit 1
-
-ENTRYPOINT ["dumb-init", "--"]
-CMD ["npm", "run", "serve:ssr"]
+EXPOSE 80
